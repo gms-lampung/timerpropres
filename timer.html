@@ -1,102 +1,10 @@
 <!DOCTYPE html>
-<html lang="en">
+<html>
 <head>
-<meta charset="UTF-8">
-<title>Timer Controller</title>
-<style>
-  body {
-    font-family: Arial, sans-serif;
-    background: #f0f2f5;
-    text-align: center;
-    padding: 40px;
-  }
-
-  h2 {
-    color: #333;
-  }
-
-  .timer-container {
-    display: flex;
-    justify-content: center;
-    flex-wrap: wrap;
-    gap: 20px;
-    margin-top: 30px;
-  }
-
-  .timer-btn {
-    font-size: 18px;
-    font-weight: bold;
-    width: 180px;
-    height: 60px;
-    border: none;
-    border-radius: 10px;
-    color: white;
-    cursor: pointer;
-    transition: 0.3s;
-  }
-
-  .active {
-    background-color: #28a745; /* hijau */
-    box-shadow: 0 4px 8px rgba(40,167,69,0.4);
-  }
-
-  .stopped {
-    background-color: #dc3545; /* merah */
-    box-shadow: 0 4px 8px rgba(220,53,69,0.4);
-  }
-
-  .timer-btn:hover {
-    transform: scale(1.05);
-  }
-
-  .status {
-    margin-top: 40px;
-    font-size: 16px;
-    color: #333;
-  }
-</style>
+    <title>Halaman Hello World</title>
 </head>
 <body>
-
-<h2>Timer Controller</h2>
-
-<div class="timer-container">
-  <button id="btn0" class="timer-btn stopped" onclick="restartTimer(0)">Timer 0</button>
-  <button id="btn1" class="timer-btn stopped" onclick="restartTimer(1)">Timer 1</button>
-  <button id="btn2" class="timer-btn stopped" onclick="restartTimer(2)">Timer 2</button>
-  <button id="btn3" class="timer-btn stopped" onclick="restartTimer(3)">Timer 3</button>
-</div>
-
-<div class="status" id="status"></div>
-
-<script>
-async function restartTimer(id) {
-  const btn = document.getElementById("btn" + id);
-  const status = document.getElementById("status");
-  const baseURL = `http://192.168.18.99:1025/v1/timer/${id}`;
-
-  try {
-    // Ubah tombol jadi merah (stop)
-    btn.classList.remove("active");
-    btn.classList.add("stopped");
-    status.textContent = `⏹️ Stopping Timer ${id}...`;
-    await fetch(`${baseURL}/stop`);
-
-    // Tunggu sedikit agar terlihat transisi
-    await new Promise(r => setTimeout(r, 500));
-
-    // Ubah tombol jadi hijau (start)
-    status.textContent = `▶️ Starting Timer ${id}...`;
-    await fetch(`${baseURL}/start`);
-    btn.classList.remove("stopped");
-    btn.classList.add("active");
-
-    status.textContent = `✅ Timer ${id} restarted successfully!`;
-  } catch (err) {
-    status.textContent = `❌ Error restarting Timer ${id}: ${err}`;
-  }
-}
-</script>
-
+    <h1>Hello, world!</h1>
+    <p>Ini adalah halaman web pertamaku.</p>
 </body>
 </html>
